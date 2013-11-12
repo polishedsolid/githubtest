@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        if (window.File) {
+            window.alert("File APIが実装されてます。");
+            // File APIが実装されている場合には、dropイベントを登録
+            document.getElementById("drop").addEventListener("drop", onDrop, false);
+        } else {
+            window.alert("本ブラウザではFile APIが使えません");
+        }
+
+        function onDrop(event)
+        {
+            var files = event.dataTransfer.files;
+            var disp = document.getElementById("drop");
+            //alert(files[0].name);
+            
+            disp.innerHTML = "";
+            for (var i = 0; i < files.length; i++) {
+                disp.innerHTML += "FileName = " + files[i].name + "ファイルの型:" + files[i].type + "ファイルサイズ:" + files[i].size / 1000 + " KB " + "<br />";
+            }
+
+            event.preventDefault();
+        }
+
+        function onDragOver(event) {
+            event.preventDefault();
+        }
+
+    </script>
+</head>
+<body>
+    <canvas width="100" height="100" style="background-color:rgb(182, 255, 0)">test</canvas>
+    <section id ="main">
+        <p>ここにドロップしてください</p>
+        <div id="drop" style="width:auto; height:200px; border:1px dotted; " ondragover="onDragOver(event)" ondrop="onDrop(event)">
+            ここにドロップしたファイルのプロパティを読み込みます。
+        </div>
+
+        <p>ここに情報を表示します</p>
+        <div id="disp"></div>
+    </section>
+</body>
+</html>
