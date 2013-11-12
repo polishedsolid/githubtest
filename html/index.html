@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            
+            function init() {
+                setInterval(draw, 66);
+            }
+
+            function draw()
+            {
+                var canvas = document.getElementById("cnvs");
+                var content = canvas.getContext("2d");
+
+                for (var i = 0; i < 1/*100000*/; i++) {
+
+                    //document.writeln(GetRandom());
+
+                    content.strokeStyle = 'rgb(' + GetRandom() + ',' + GetRandom() + ',' + GetRandom() + ')'; //rgb(GetRandom(), GetRandom(), GetRandom());
+                    content.globalAlpha = 1;
+                    content.lineWidth = GetRandom();// % 100;
+                    content.beginPath();
+                    content.moveTo(GetRandom(), GetRandom());
+                    content.lineTo(GetRandom(), GetRandom());
+                    content.closePath();
+                    content.stroke();
+
+                    //break;
+                }
+            }
+
+            function GetRandom() {
+                var d = Math.floor(Math.random() * 512);
+                return d;
+            }
+
+        </script>
+    </head>
+    <body>
+        <form name="frm">
+            <input type="button" name="btn" onclick="init()"/>
+        </form>
+
+        <canvas id="cnvs" width="512" height="512" style="background-color:black">test</canvas>
+    </body>
+</html>
